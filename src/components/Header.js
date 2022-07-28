@@ -5,8 +5,12 @@ import {
    SearchIcon,
    ShoppingCartIcon
 } from '@heroicons/react/outline'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export const Header = () => {
+
+   const {data: session} = useSession()
+
    return (
       <div>
          <header>
@@ -15,7 +19,7 @@ export const Header = () => {
                <div className='mt-2 flex items-center flex-grow sm:flex-grow-0'>
                   <Image
                      src='https://links.papareact.com/f90'
-                     width={150}
+                     width={150} 
                      height={40}
                      objectFit='contain'
                      className='cursor-pointer'
@@ -34,8 +38,13 @@ export const Header = () => {
 
                {/* Rigth Section */}
                <div className='text-white flex'>
-                  <div className='mx-4 cursor-pointer hover:underline'>
-                     <p>Hello CristopherVA</p>
+                  <div
+                     onClick={ !session ? signIn : signOut }
+                     className='mx-4 cursor-pointer hover:underline'
+                  >
+                     <p>
+                        {session ? `Hello, ${session.user.name}` : 'Sign In'}
+                     </p>
                      <p className='font-extrabold md:text-sm'>Account & List</p>
                   </div>
 
