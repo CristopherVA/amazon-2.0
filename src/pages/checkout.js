@@ -8,11 +8,10 @@ import { Header } from '../components/Header'
 import { selectItems, selectTotal } from '../slices/basketSlice'
 
 const checkout = () => {
-    
+
     const { data: session } = useSession()
     const items = useSelector(selectItems)
     const total = useSelector(selectTotal)
-    console.log(total)
     return (
         <div>
             <Header />
@@ -51,15 +50,16 @@ const checkout = () => {
                             <>
                                 <h2 className='whitespace-nowrap'>Subtotal: ({items.length} items): {' '}
                                     <span className='font-bold'>
-                                        <CurrencyFormat 
-                          signIn                 className='font-bold text-xl mt-2' 
+                                        <CurrencyFormat
+                                            value={total}
+                                            className='font-bold text-xl mt-2'
                                             disabled={true} />
                                     </span>
                                 </h2>
 
                                 <button
-                                    onClick={!session ? signIn : 'click' }
-                                    disabled={ !session }
+                                    onClick={!session ? signIn : 'click'}
+                                    disabled={!session}
                                     className={`button mt-2 ${!session && 'from-gray-300 to-gray-500 border-gray-300 text-gray-300 cursor-not-allowed'}`}
                                 >{!session ? 'Sign In to checkout' : 'Proceed to pay'}</button>
                             </>
