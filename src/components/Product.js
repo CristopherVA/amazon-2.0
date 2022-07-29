@@ -50,18 +50,19 @@ export const Product = ({ id, title, description, price, category, image }) => {
       <div className='flex'>
         {Array(rating).fill().map((_, i) => {
           return (
-            <StarIcon className='h-5 mt-2 text-yellow-500' />
+            <StarIcon key={i} className='h-5 mt-2 text-yellow-500' />
           )
         })}
       </div>
 
       <p className='mt-4 text-xs line-clamp-2'>{description}</p>
-      <div>
+      <div className='mt-2'>
         <CurrencyFormat
           value={price}
           thousandSeparator={true}
           prefix={'$'}
           className='font-bold text-xl mt-2'
+          disabled={true}
         />
       </div>
 
